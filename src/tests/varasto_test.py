@@ -41,7 +41,7 @@ class TestVarasto(unittest.TestCase):
 
     def test_negatiivinen_tilavuus_nollataan(self):
         v = Varasto(-5)
-        self.assertAlmostEqual(v.tilavuus, 1.0)
+        self.assertAlmostEqual(v.tilavuus, 0.0)
 
     def test_negatiivinen_alkusaldo_nollataan(self):
         v = Varasto(10, -3)
