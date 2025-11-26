@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="fi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Varasto - Etusivu</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+        h1 {
+            color: #333;
+        }
+        .container {
+            background-color: white;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .btn {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: white;
+            text-decoration: none;
+            border-radius: 4px;
+            margin-bottom: 20px;
+        }
+        .btn:hover {
+            background-color: #0056b3;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        th, td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+        th {
+            background-color: #f8f9fa;
+            font-weight: bold;
+        }
+        tr:hover {
+            background-color: #f8f9fa;
+        }
+        .view-btn {
+            padding: 5px 15px;
+            background-color: #28a745;
+            color: white;
+            text-decoration: none;
+            border-radius: 3px;
+        }
+        .view-btn:hover {
+            background-color: #218838;
+        }
+        .empty-message {
+            padding: 20px;
+            text-align: center;
+            color: #666;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Varastonhallinta</h1>
+        <a href="{{ url_for('luo_varasto') }}" class="btn">Luo uusi varasto</a>
+        
+        {% if varastot %}
+        <table>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Nimi</th>
+                    <th>Tilavuus</th>
+                    <th>Saldo</th>
+                    <th>Vapaa tila</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for id, data in varastot.items() %}
+                <tr>
+                    <td>{{ id }}</td>
+                    <td>{{ data.nimi }}</td>
+                    <td>{{ "%.2f"|format(data.varasto.tilavuus) }}</td>
+                    <td>{{ "%.2f"|format(data.varasto.saldo) }}</td>
+                    <td>{{ "%.2f"|format(data.varasto.paljonko_mahtuu()) }}</td>
+                    <td>
+                        <a href="{{ url_for('nayta_varasto', varasto_id=id) }}" 
+                           class="view-btn">Näytä</a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        {% else %}
+        <div class="empty-message">
+            <p>Ei varastoja. Luo ensimmäinen varasto yllä olevasta napista.</p>
+        </div>
+        {% endif %}
+    </div>
+</body>
+</html>
