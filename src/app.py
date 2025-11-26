@@ -14,10 +14,13 @@ def index():
 @app.route('/luo', methods=['GET', 'POST'])
 def luo_varasto():
     if request.method == 'POST':
-        nimi = request.form.get('nimi', '')
-        tilavuus = float(request.form.get('tilavuus', 0))
-        alku_saldo = float(request.form.get('alku_saldo', 0))
-        varasto_service.luo_varasto(nimi, tilavuus, alku_saldo)
+        try:
+            nimi = request.form.get('nimi', '')
+            tilavuus = float(request.form.get('tilavuus', 0))
+            alku_saldo = float(request.form.get('alku_saldo', 0))
+            varasto_service.luo_varasto(nimi, tilavuus, alku_saldo)
+        except ValueError:
+            pass
         return redirect(url_for('index'))
     return render_template('luo_varasto.html')
 
@@ -34,17 +37,23 @@ def nayta_varasto(varasto_id):
 
 @app.route('/varasto/<int:varasto_id>/lisaa', methods=['POST'])
 def lisaa_varastoon(varasto_id):
-    maara = float(request.form.get('maara', 0))
-    varasto_service.lisaa_varastoon(varasto_id, maara)
+    try:
+        maara = float(request.form.get('maara', 0))
+        varasto_service.lisaa_varastoon(varasto_id, maara)
+    except ValueError:
+        pass
     return redirect(url_for('nayta_varasto', varasto_id=varasto_id))
 
 
 @app.route('/varasto/<int:varasto_id>/ota', methods=['POST'])
 def ota_varastosta(varasto_id):
-    maara = float(request.form.get('maara', 0))
-    varasto_service.ota_varastosta(varasto_id, maara)
+    try:
+        maara = float(request.form.get('maara', 0))
+        varasto_service.ota_varastosta(varasto_id, maara)
+    except ValueError:
+        pass
     return redirect(url_for('nayta_varasto', varasto_id=varasto_id))
 
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run()

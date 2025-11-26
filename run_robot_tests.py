@@ -7,6 +7,9 @@ import os
 
 
 def run_tests():
+    # Get the directory where this script is located
+    script_dir = os.path.dirname(os.path.abspath(__file__))
+    
     # Start Flask app in background
     env = os.environ.copy()
     env['FLASK_APP'] = 'src/app.py'
@@ -16,7 +19,7 @@ def run_tests():
         stdout=subprocess.PIPE,
         stderr=subprocess.PIPE,
         env=env,
-        cwd='/home/runner/work/ohtuvarasto/ohtuvarasto'
+        cwd=script_dir
     )
     
     # Wait for Flask to start
@@ -28,7 +31,7 @@ def run_tests():
         print("Running Robot tests...")
         result = subprocess.run(
             ['poetry', 'run', 'robot', 'src/tests/robot/'],
-            cwd='/home/runner/work/ohtuvarasto/ohtuvarasto',
+            cwd=script_dir,
             capture_output=False
         )
         return result.returncode
