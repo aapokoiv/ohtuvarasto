@@ -33,3 +33,7 @@ class VarastoService:
         if varasto_data:
             return varasto_data["varasto"].ota_varastosta(maara)
         return 0
+
+    def tyhjenna(self):
+        self._varastot = {}
+        self._seuraava_id = 1

@@ -21,6 +21,7 @@ Open Browser To Home Page
     Set Selenium Speed    ${DELAY}
 
 Go To Home Page
+    Go To    ${HOME URL}reset
     Go To    ${HOME URL}
     Title Should Be    Varasto - Etusivu
 
@@ -53,8 +54,8 @@ View Warehouse Details
     Input Text    tilavuus    50.0
     Input Text    alku_saldo    10.0
     Click Button    Luo varasto
-    Click Element    xpath=//a[@class='view-btn'][last()]
-    Title Should Contain    Olutvarasto
+    Click Link    Näytä
+    Title Should Be    Varasto - Olutvarasto
     Page Should Contain    Tilavuus:
     Page Should Contain    50.00
     Page Should Contain    Saldo:
@@ -68,7 +69,7 @@ Add Items To Warehouse
     Input Text    tilavuus    100.0
     Input Text    alku_saldo    20.0
     Click Button    Luo varasto
-    Click Element    xpath=//a[@class='view-btn'][last()]
+    Click Link    Näytä
     Input Text    lisaa_maara    30.5
     Click Button    Lisää
     Page Should Contain    50.50
@@ -79,7 +80,7 @@ Remove Items From Warehouse
     Input Text    tilavuus    100.0
     Input Text    alku_saldo    50.0
     Click Button    Luo varasto
-    Click Element    xpath=//a[@class='view-btn'][last()]
+    Click Link    Näytä
     Input Text    ota_maara    15.5
     Click Button    Ota
     Page Should Contain    34.50
@@ -101,7 +102,7 @@ Navigate Back From Warehouse Details
     Input Text    nimi    Paluuvarasto
     Input Text    tilavuus    50.0
     Click Button    Luo varasto
-    Click Element    xpath=//a[@class='view-btn'][last()]
+    Click Link    Näytä
     Click Link    ← Takaisin
     Title Should Be    Varasto - Etusivu
 

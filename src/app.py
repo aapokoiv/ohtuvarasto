@@ -55,5 +55,11 @@ def ota_varastosta(varasto_id):
     return redirect(url_for('nayta_varasto', varasto_id=varasto_id))
 
 
+@app.route('/reset', methods=['GET', 'POST'])
+def reset():
+    varasto_service.tyhjenna()
+    return redirect(url_for('index'))
+
+
 if __name__ == '__main__':
     app.run()
