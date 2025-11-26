@@ -53,7 +53,7 @@ View Warehouse Details
     Input Text    tilavuus    50.0
     Input Text    alku_saldo    10.0
     Click Button    Luo varasto
-    Click Link    Näytä
+    Click Element    xpath=//a[@class='view-btn'][last()]
     Title Should Contain    Olutvarasto
     Page Should Contain    Tilavuus:
     Page Should Contain    50.00
@@ -68,7 +68,7 @@ Add Items To Warehouse
     Input Text    tilavuus    100.0
     Input Text    alku_saldo    20.0
     Click Button    Luo varasto
-    Click Link    Näytä
+    Click Element    xpath=//a[@class='view-btn'][last()]
     Input Text    lisaa_maara    30.5
     Click Button    Lisää
     Page Should Contain    50.50
@@ -79,7 +79,7 @@ Remove Items From Warehouse
     Input Text    tilavuus    100.0
     Input Text    alku_saldo    50.0
     Click Button    Luo varasto
-    Click Link    Näytä
+    Click Element    xpath=//a[@class='view-btn'][last()]
     Input Text    ota_maara    15.5
     Click Button    Ota
     Page Should Contain    34.50
@@ -101,8 +101,8 @@ Navigate Back From Warehouse Details
     Input Text    nimi    Paluuvarasto
     Input Text    tilavuus    50.0
     Click Button    Luo varasto
-    Click Link    Näytä
-    Click Link    Takaisin
+    Click Element    xpath=//a[@class='view-btn'][last()]
+    Click Link    ← Takaisin
     Title Should Be    Varasto - Etusivu
 
 Cancel Warehouse Creation
